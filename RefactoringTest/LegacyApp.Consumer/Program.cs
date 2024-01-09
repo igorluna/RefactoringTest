@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LegacyApp.Services;
+using System;
 
 namespace LegacyApp.Consumer
 {
@@ -11,7 +12,8 @@ namespace LegacyApp.Consumer
 
         public static void ProveAddUser(string[] args)
         {
-            var userService = new UserService();
+            var userService = new UserService(
+                new DateTimeService());
             
             var addResult = userService.AddUser(
                 "Igor",
