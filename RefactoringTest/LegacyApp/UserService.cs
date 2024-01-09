@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LegacyApp.Services;
+using LegacyApp.Services.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,9 +8,18 @@ namespace LegacyApp
 {
     public class UserService
     {
+        private readonly IDateTimeService dateTimeService;
+
+        public UserService(
+            IDateTimeService datetimeService)
+        {
+            this.dateTimeService = datetimeService;
+        }
+
         public bool AddUser(string firname, string surname, string email, DateTime dateOfBirth, int clientId)
         {
-            if (string.IsNullOrEmpty(firname) || string.IsNullOrEmpty(surname))
+            if (string.IsNullOrEmpty(firname) 
+                || string.IsNullOrEmpty(surname))
             {
                 return false;
             }
@@ -18,7 +29,7 @@ namespace LegacyApp
                 return false;
             }
 
-            var now = DateTime.Now;
+            var now = dateTimeService.GetCurrentDateTime();
             var age = now.Year - dateOfBirth.Year;
 
             if (now.Month < dateOfBirth.Month || (now.Month == dateOfBirth.Month && now.Day < dateOfBirth.Day)) age--;
