@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LegacyApp
+﻿namespace LegacyApp
 {
-    public class ClientRepository
+    using LegacyApp.Services.Contracts;
+
+    public class ClientRepository : IClientRepository
     {
         public Client GetById(int clientId) 
         {

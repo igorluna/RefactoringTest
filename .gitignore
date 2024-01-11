@@ -343,3 +343,5 @@ reports/
 results.jtl
 
 # DO NOT REMOVE - This project was created using farfetch-dotnet-service-clean-arch boilerplate.
+/RefactoringTest/.vs/RefactoringTest/DesignTimeBuild/.dtbcache.v2
+/obj/

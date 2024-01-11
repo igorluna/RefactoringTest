@@ -13,7 +13,10 @@ namespace LegacyApp.Consumer
         public static void ProveAddUser(string[] args)
         {
             var userService = new UserService(
-                new DateTimeService());
+                new DateTimeService(),
+                new ClientRepository(),
+                new UserCreditServiceClient(),
+                new UserDataAccess());
             
             var addResult = userService.AddUser(
                 "Igor",

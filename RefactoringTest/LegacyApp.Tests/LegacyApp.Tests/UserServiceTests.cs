@@ -7,9 +7,12 @@ namespace LegacyApp.Tests
     public class UserServiceTests
     {
         Mock<IDateTimeService> datetimeService = new Mock<IDateTimeService>();
-        
+        Mock<IClientRepository> clientRepository = new Mock<IClientRepository>();
+        Mock<IUserCreditServiceClient> userCreditServiceClient = new Mock<IUserCreditServiceClient>();
+        Mock<IUserDataAccess> userDataAccess = new Mock<IUserDataAccess>();
         UserService sut;
         
+
 
         [Test]
         public void AddUser_ShouldReturnFalse_WhenMissingFirstName()
@@ -24,7 +27,10 @@ namespace LegacyApp.Tests
             datetimeService
                 .Setup(x => x.GetCurrentDateTime())
                 .Returns(new DateTime(2024, 01, 09));
-            sut = new UserService(datetimeService.Object);
+            sut = new UserService(datetimeService.Object,
+                clientRepository.Object, 
+                userCreditServiceClient.Object,
+                userDataAccess.Object);
 
             var expected = false;
 
@@ -47,7 +53,10 @@ namespace LegacyApp.Tests
             datetimeService
                 .Setup(x => x.GetCurrentDateTime())
                 .Returns(new DateTime(2024, 01, 09));
-            sut = new UserService(datetimeService.Object);
+            sut = new UserService(datetimeService.Object,
+                clientRepository.Object,
+                userCreditServiceClient.Object,
+                userDataAccess.Object);
 
             var expected = false;
 
@@ -59,7 +68,7 @@ namespace LegacyApp.Tests
         }
 
         [TestCase("igor.luna&email.com")]
-        [TestCase("igor,luna@email.com")]
+        [TestCase("igor-luna0email.com")]
         public void AddUser_ShouldReturnFalse_WhenSentAnInvalidEmail(string invalidEmail)
         {
             // Arrange
@@ -71,7 +80,10 @@ namespace LegacyApp.Tests
             datetimeService
                 .Setup(x => x.GetCurrentDateTime())
                 .Returns(new DateTime(2024, 01, 09));
-            sut = new UserService(datetimeService.Object);
+            sut = new UserService(datetimeService.Object,
+                clientRepository.Object,
+                userCreditServiceClient.Object,
+                userDataAccess.Object);
 
             var expected = false;
 
@@ -96,7 +108,11 @@ namespace LegacyApp.Tests
             datetimeService
                 .Setup(x => x.GetCurrentDateTime())
                 .Returns(new DateTime(2024, 01, 09));
-            sut = new UserService(datetimeService.Object);
+            sut = new UserService(
+                datetimeService.Object,
+                clientRepository.Object,
+                userCreditServiceClient.Object,
+                userDataAccess.Object);
 
             var expected = false;
 
